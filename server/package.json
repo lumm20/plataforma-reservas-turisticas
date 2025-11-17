@@ -1,0 +1,39 @@
+{
+  "name": "reservas-turisticas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lumm20/plataforma-reservas-turisticas.git"
+  },
+  "keywords": [
+    "reservas",
+    "turismo"
+  ],
+  "author": "agiles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lumm20/plataforma-reservas-turisticas/issues"
+  },
+  "homepage": "https://github.com/lumm20/plataforma-reservas-turisticas#readme",
+  "description": "",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
+    "nodemon": "^3.1.11"
+  }
+}
