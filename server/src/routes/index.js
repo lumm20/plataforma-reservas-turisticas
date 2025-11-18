@@ -1,7 +1,9 @@
 import e from "express";
-import experienceRouter from "./experience.js";
+import experienceRouter from "./experience.router.js";
+import authRouter from "./auth.router.js";
 const router = e.Router();
 
+router.use("/auth", authRouter);
 router.use('/experiences',experienceRouter);
 
 router.get('/', (req, res) => {
