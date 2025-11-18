@@ -22,18 +22,18 @@ const User = sequelize.define('User', {
             isEmail: true,
         }
     },
-    /*
+    //es asi porque se registra el hash de la contraseña, no el texto plano
     password_h:{
         type: DataTypes.STRING(64),
         allowNull: false,
         validate:{
             is: /^\$2[aby]\$[0-9]{2}\$/i,
         }
-    },*/
-    password_h:{
-        type: DataTypes.STRING(200),
-        allowNull: false,
     },
+    // password_h:{
+    //     type: DataTypes.STRING(200),
+    //     allowNull: false,
+    // },
     role: {
         type: DataTypes.ENUM("cliente", "proveedor"),
         allowNull: false,
