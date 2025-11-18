@@ -22,12 +22,25 @@ const User = sequelize.define('User', {
             isEmail: true,
         }
     },
+    /*
     password_h:{
         type: DataTypes.STRING(64),
         allowNull: false,
         validate:{
             is: /^\$2[aby]\$[0-9]{2}\$/i,
         }
+    },*/
+    password_h:{
+        type: DataTypes.STRING(200),
+        allowNull: false,
+    },
+    role: {
+        type: DataTypes.ENUM("cliente", "proveedor"),
+        allowNull: false,
+    },
+    verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     }
 }, { tableName: 'Users' });
 

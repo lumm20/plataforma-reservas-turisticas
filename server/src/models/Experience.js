@@ -19,7 +19,8 @@ const Experience = sequelize.define('Experience', {
         allowNull: false,
     },
     location:{
-        type: DataTypes.GEOMETRY('point'),
+        type: DataTypes.STRING,
+        //type: DataTypes.GEOMETRY('point'),
         allowNull: false
     },
     price: {
