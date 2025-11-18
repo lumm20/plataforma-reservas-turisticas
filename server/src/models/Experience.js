@@ -15,7 +15,7 @@ const Experience = sequelize.define('Experience', {
         }
     },
     description:{
-        type: DataTypes.TEXT('long'),
+        type: DataTypes.TEXT(),
         allowNull: false,
     },
     location:{
