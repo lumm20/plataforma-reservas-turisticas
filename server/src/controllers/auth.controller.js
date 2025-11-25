@@ -3,7 +3,7 @@ import { hashPassword } from "../utils/security/hashing.js";
 
 export const register = async (req, res) => {
   try {
-    const { name, email, password, confirmPassword, role, description, location, service_type } = req.body;
+    const { name, email, password, confirmPassword, role, service_type } = req.body;
 
     if (!name || !email || !password || !confirmPassword || !role) {
       return res.status(400).json({ error: "Todos los campos son obligatorios" });
@@ -18,7 +18,7 @@ export const register = async (req, res) => {
     }
 
     if (role === "proveedor") {
-      if (!description || !location || !service_type) {
+      if (!service_type) {
         return res.status(400).json({ error: "Todos los campos de proveedor son obligatorios" });
       }
     }
@@ -41,8 +41,6 @@ export const register = async (req, res) => {
     if (role === "proveedor") {
       await ProviderProfile.create({
         user_id: user.id,
-        description,
-        location,
         service_type
       });
     }

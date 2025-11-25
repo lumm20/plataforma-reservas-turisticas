@@ -7,14 +7,6 @@ const ProviderProfile = sequelize.define("ProviderProfile", {
     primaryKey: true,
     autoIncrement: true
   },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true,
-  },
-  location: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   service_type: {
     type: DataTypes.STRING,
     allowNull: true,

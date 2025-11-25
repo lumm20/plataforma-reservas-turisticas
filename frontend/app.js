@@ -18,8 +18,6 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     };
 
     if (data.role === "proveedor") {
-        data.description = document.getElementById("description").value;
-        data.location = document.getElementById("location").value;
         data.service_type = document.getElementById("service_type").value;
     }
 

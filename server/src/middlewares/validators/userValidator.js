@@ -29,14 +29,6 @@ export const validateUser = () => {
       .notEmpty().withMessage("El rol es obligatorio")
       .isIn(["cliente", "proveedor"]).withMessage("Rol inválido"),
 
-    body("description")
-      .if(body("role").equals("proveedor"))
-      .notEmpty().withMessage("La descripción es obligatoria para proveedores"),
-
-    body("location")
-      .if(body("role").equals("proveedor"))
-      .notEmpty().withMessage("La ubicación es obligatoria para proveedores"),
-
     body("service_type")
       .if(body("role").equals("proveedor"))
       .notEmpty().withMessage("El tipo de servicio es obligatorio para proveedores"),
