@@ -3,24 +3,34 @@ import AppError from '../../utils/AppError.js';
 
 const validateExperience = () => {
     return [
-        body('name')
+        body('exp.name')
             .trim()
             .notEmpty().withMessage('El nombre es requerido')
+            .bail()
             .isLength({ min: 3, max: 50 }).withMessage('El nombre debe tener entre 3 y 50 caracteres')
             .escape(),
-        body('description')
+        body('exp.description')
             .trim()
             .notEmpty().withMessage('La descripción es requerida')
-            .isLength({ min: 1, max: 300 }).withMessage('La descripción debe tener entre 1 y 300 caracteres')
+            .bail()
+            .isLength({max: 300 }).withMessage('La descripción debe máximo 300 caracteres')
             .escape(),
-        body('location')
+        body('exp.location')
             .trim()
             .notEmpty().withMessage('La ubicación es requerida')
-            .isLatLong(),
-        body('price')
+            .bail()
+            .isLatLong().withMessage('La ubicación debe tener un formato de lat,long'),
+        body('exp.price')
             .trim()
             .notEmpty().withMessage('El precio es requerido')
-            .isCurrency({allow_negatives:false}).withMessage('El precio debe ser un número entero/decimal positivo')
+            .bail()
+            .isCurrency({allow_negatives:false}).withMessage('El precio debe ser un número entero/decimal positivo'),
+        body('exp.owner_id')
+            .trim()
+            .notEmpty().withMessage('La experiencia debe tener el id de proveedor')
+            .bail()
+            .isInt({gt:0}).withMessage('El id de proveedor debe ser un número entero positivo'),
+
     ]
 };
 
