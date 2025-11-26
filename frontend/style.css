@@ -157,3 +157,54 @@ button[type="submit"]:active {
         font-size: 26px;
     }
 }
+
+/* Estilos para checkbox "Recordarme" */
+.checkbox-group {
+    margin-bottom: 15px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #9e8e6e;
+}
+
+.checkbox-label span {
+    color: #555;
+    font-size: 14px;
+}
+
+/* Estilos para links */
+.link-group {
+    margin-top: 25px;
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.link-group p {
+    color: #666;
+    font-size: 14px;
+}
+
+.link-group a {
+    color: #9e8e6e;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link-group a:hover {
+    color: #7a6e54;
+    text-decoration: underline;
+}
