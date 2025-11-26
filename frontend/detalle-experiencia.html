@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title><%= experiencia.name %></title>
+    <script src="/js/experience-detail.js" defer></script>
+</head>
+<body>
+
+    <h1 id="expName"><%= experiencia.name %></h1>
+
+    <p id="expDescription"><%= experiencia.description %></p>
+
+    <p><strong>Precio:</strong> $<span id="expPrice"><%= experiencia.price %></span></p>
+
+    <p><strong>Cupo:</strong> <span id="expCupo"><%= experiencia.cupo_disponible %></span></p>
+
+    <p><strong>Duración:</strong> <span id="expDuration"><%= experiencia.duration %></span></p>
+
+    <p><strong>Categoría:</strong> <span id="expCategory"><%= experiencia.category %></span></p>
+
+    <p><strong>Proveedor:</strong> <span id="expProvider"><%= experiencia.provider_name %></span></p>
+
+    <button id="btnReserva">Reservar Ahora</button>
+
+</body>
+</html>

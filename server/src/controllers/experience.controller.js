@@ -58,4 +58,30 @@ const updateExperience = async (req, res) =>{
 }
 
 
-export { addExperience, getExperience, getAll, deleteExperience, updateExperience};
+export { addExperience, getExperience, getAll, deleteExperience, updateExperience, showExperienceDetail};
+
+const showExperienceDetail = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const experience = await Experience.findByPk(id);
+
+        // Si no existe -> 404
+        if (!experience) {
+            return res.status(404).render("404", {
+                mensaje: "La experiencia que buscas no existe"
+            });
+        }
+
+        // Renderizar la vista detalle-experiencia.ejs
+        res.render("detalle-experiencia", {
+            experiencia: experience.dataValues
+        });
+
+    } catch (error) {
+        console.error("Error en detalle experiencia:", error);
+        res.status(500).render("500", {
+            mensaje: "Error interno del servidor"
+        });
+    }
+};
