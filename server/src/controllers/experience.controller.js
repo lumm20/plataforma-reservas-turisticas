@@ -3,6 +3,7 @@ import { Experience } from "../models/index.js";
 import AppError from "../utils/AppError.js";
 
 const addExperience = async (req, res)=>{
+    console.log('adding experience');
     checkResults(req);
     const { exp } = req.body;
     const newExp = await Experience.create(exp);
@@ -15,7 +16,7 @@ const getExperience = async (req, res) =>{
     const { id } = req.params;
     const exp = await Experience.findByPk(id);
     console.log('exp found:',exp);
-    if(exp.dataValues) return res.status(200).json({experience: exp.dataValues});
+    if(exp.dataValues) return res.status(200).json(exp.dataValues);
     
     throw new AppError('Experience not found',404);
 }
@@ -24,7 +25,7 @@ const getAll = async (req,res) =>{
     const results = await Experience.findAll({});
     console.log('Experiences found:',results);
     if(results.length > 0){ 
-        const exps = results.map(result =>{result.dataValues});
+        const exps = results.map(result =>result.dataValues);
         return res.status(200).json({experiences: exps})
     }
     throw new AppError('Experiences not found',404);
