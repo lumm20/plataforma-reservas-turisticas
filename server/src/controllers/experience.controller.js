@@ -10,6 +10,7 @@ const addExperience = async (req, res)=>{
 };
 
 const getExperience = async (req, res) =>{
+    console.log(">>> ¡PETICIÓN RECIBIDA EN EL BACKEND! ID:", req.params.id);
     checkResults(req);
     const { id } = req.params;
     const exp = await Experience.findByPk(id);

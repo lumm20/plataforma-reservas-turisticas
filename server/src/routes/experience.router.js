@@ -13,7 +13,7 @@ import { validateExperience, validateExperienceId } from '../middlewares/validat
 const experienceRouter = e.Router();
 
 experienceRouter.get("/", getAll);
-experienceRouter.get("/:id", validateExperienceId, getExperience);
+experienceRouter.get("/:id", getExperience);
 experienceRouter.get("/detalle/:id", showExperienceDetail);
 experienceRouter.post("/", validateExperience, addExperience);
 experienceRouter.put("/:id", validateExperienceId, validateExperience, updateExperience);

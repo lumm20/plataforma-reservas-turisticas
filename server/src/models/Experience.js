@@ -11,22 +11,44 @@ const Experience = sequelize.define('Experience', {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-            is: /([A-Za-z]+( [A-Za-z]+)+)/i
+            // Permite letras y espacios
+            is: /^[a-zA-Z\s]*$/ 
         }
     },
-    description:{
-        type: DataTypes.TEXT(),
+    description: {
+        type: DataTypes.TEXT,
         allowNull: false,
     },
-    location:{
+    location: {
         type: DataTypes.STRING,
-        //type: DataTypes.GEOMETRY('point'),
         allowNull: false
     },
     price: {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
+    // --- NUEVOS CAMPOS AGREGADOS ---
+    quota: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 10 // Valor por defecto si no se envía
+    },
+    duration: {
+        type: DataTypes.STRING, // Ej: "3 horas", "1 día"
+        allowNull: true
+    },
+    category: {
+        type: DataTypes.STRING, // Ej: "Aventura", "Gastronomía"
+        allowNull: true
+    },
+    imageUrl: {
+        type: DataTypes.STRING, // URL de la imagen principal
+        allowNull: true
+    },
+    owner_id: { // Veo que ya lo tienes en pgAdmin, lo dejamos explícito
+        type: DataTypes.INTEGER,
+        allowNull: true 
+    }
 
 }, { tableName: 'Experiences' });
 
