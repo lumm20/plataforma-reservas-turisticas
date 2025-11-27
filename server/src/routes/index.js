@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     version: '1.0.0',
     endpoints: {
       auth: {
-      experiences: '/api/experiences',
+      register: '/api/auth/register',
       login: 'POST /api/auth/login'
       },
       experiences: 'api/experiences',
