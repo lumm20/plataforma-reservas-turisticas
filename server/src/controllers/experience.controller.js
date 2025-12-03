@@ -3,6 +3,7 @@ import { Experience } from "../models/index.js";
 import AppError from "../utils/AppError.js";
 
 const addExperience = async (req, res)=>{
+    console.log('adding experience');
     checkResults(req);
     const { exp } = req.body;
     const newExp = await Experience.create(exp);
@@ -10,12 +11,21 @@ const addExperience = async (req, res)=>{
 };
 
 const getExperience = async (req, res) =>{
-    console.log(">>> ¡PETICIÓN RECIBIDA EN EL BACKEND! ID:", req.params.id);
+    const getExperience = async (req, res) => {
+    // console.log(">>> PETICIÓN RECIBIDA EN EL BACKEND! ID:", req.params.id); // Ya lo podemos quitar si quieres
     checkResults(req);
     const { id } = req.params;
     const exp = await Experience.findByPk(id);
-    if(exp && exp.dataValues) return res.status(200).json({experience: exp.dataValues});
-    throw new AppError('Experience not found',404);
+
+    // USAMOS TU VALIDACIÓN + SU FORMATO DE ERROR
+    if (exp && exp.dataValues) {
+        // TU RESPUESTA (Necesaria para el Frontend)
+        return res.status(200).json({ experience: exp.dataValues });
+    }
+
+    // EL ERROR DE TUS COMPAÑEROS (Para respetar su arquitectura)
+    throw new AppError('Experience not found', 404);
+};
 };
 
 const getAll = async (req,res) =>{
@@ -25,6 +35,7 @@ const getAll = async (req,res) =>{
         return res.status(200).json({experiences: exps});
     }
     throw new AppError('Experiences not found',404);
+    
 };
 
 const deleteExperience = async (req, res) =>{
