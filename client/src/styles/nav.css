@@ -1,0 +1,42 @@
+nav {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 15px 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(150, 150, 150, 0.2);
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 30px;
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+nav a {
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #776953;
+    padding: 10px 16px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    background: #e9dfcf;
+    color: #5f533f;
+    transform: translateY(-2px);
+}
+
+nav a:active {
+    transform: translateY(0);
+}
+
+/* Para que el contenido no quede tapado por el nav */
+body {
+    padding-top: 100px;
+}
