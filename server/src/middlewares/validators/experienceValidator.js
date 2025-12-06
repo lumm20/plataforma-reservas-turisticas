@@ -42,7 +42,13 @@ const validateExperienceId = ()=>{
 }
 
 const checkResults = (req) => {
-    const results = validationResult(req);
+    let results;
+    try {
+        results = validationResult(req);
+    } catch (error) {
+        console.error(error.message);
+        throw error;
+    }
     if (!results.isEmpty()) {
         const resFormatted = results.formatWith(err => err.msg);
         console.log('Formatted errors:', resFormatted);
