@@ -1,7 +1,7 @@
 import { register } from "../auth/authService.js";
 import { render } from "../utils/render.js";
 
-export function RegisterView(msg=''){
+export function RegisterView(msg = '') {
     render(`
         <div class="container">
             <h1>Registro</h1>
@@ -36,7 +36,7 @@ export function RegisterView(msg=''){
                 </div>
 
                 <!-- Campo extra del proveedor -->
-                <div id="providerFields" style="display:none;">
+                <div id="providerFields">
                     <div class="form-group">
                         <label>Tipo de servicio</label>
                         <select id="service_type">
@@ -63,9 +63,19 @@ export function RegisterView(msg=''){
         </div>
     `);
 
+    const providerFields = document.getElementById("providerFields");
+    providerFields.style.display='none';
+    
+    const resp = document.getElementById('response');
+    document.getElementById("role").addEventListener("change", (e) => {
+        providerFields.style.display =
+            e.target.value === "proveedor" ? "block" : "none";
+    });
+
     document.getElementById("registerForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         // const data = new FormData(e.target);
+        resp.textContent ='';
         const data = {
             name: document.getElementById("name").value,
             email: document.getElementById("email").value,
@@ -78,11 +88,12 @@ export function RegisterView(msg=''){
             data.service_type = document.getElementById("service_type").value;
         }
         try {
-          await register(data);
-          history.pushState(null, null, "/");
-          location.reload();
+            await register(data);
+            history.pushState(null, null, "/");
+            location.reload();
         } catch (err) {
-          RegisterView(err.message);
+            resp.textContent = err.message;
+            // RegisterView(err.message);
         }
-      });
+    });
 }
