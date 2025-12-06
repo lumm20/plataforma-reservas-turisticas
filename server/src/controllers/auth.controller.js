@@ -1,5 +1,6 @@
 import { User, ProviderProfile } from "../models/index.js";
 import { hashPassword } from "../utils/security/hashing.js";
+import { generateToken } from "../utils/security/jwt.js";
 
 export const register = async (req, res) => {
   try {
@@ -44,8 +45,9 @@ export const register = async (req, res) => {
         service_type
       });
     }
-
-    return res.json({ message: "Registro exitoso. Revisa tu email para verificar tu cuenta" });
+    const {id} =user.dataValues;
+    const token = generateToken({id,email,role});
+    return res.json({ message: "Registro exitoso." , token, user:{id,name,email,role}});
 
   } catch (err) {
     console.error(err);
