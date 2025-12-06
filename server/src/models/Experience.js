@@ -9,10 +9,7 @@ const Experience = sequelize.define('Experience', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-            is: /([A-Za-z]+( [A-Za-z]+)+)/i
-        }
+        allowNull: false
     },
     description:{
         type: DataTypes.TEXT(),
