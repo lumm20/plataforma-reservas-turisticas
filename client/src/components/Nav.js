@@ -1,12 +1,12 @@
-import { getUser, logout } from "../auth/authService";
-import { isAuthenticated } from "../auth/token";
+import { auth } from "../auth/authService.js";
+import { token } from "../auth/token";
 
 export function renderNav() {
   document.getElementById("nav").innerHTML = `
     <a href="/" data-link>Home</a>
-    ${isAuthenticated()
+    ${token.isAuthenticated()
       ? `<a href="#" id="logoutBtn">Salir</a>
-      ${getUser().role==='proveedor'?
+      ${auth.getUser().role==='proveedor'?
         `<a href="/experiencies/new" data-link>New Experience</a>`
         :
         `<a href="#" data-link>Experiences</a>`
@@ -19,9 +19,9 @@ export function renderNav() {
       
   `;
 
-  if (isAuthenticated()) {
+  if (token.isAuthenticated()) {
     document.getElementById("logoutBtn").addEventListener("click", () => {
-      logout();
+      auth.logout();
       history.pushState(null, null, "/");
       location.reload();
     });

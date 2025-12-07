@@ -1,77 +1,65 @@
-import { setToken, clearToken } from "./token.js";
+import { token } from "./token.js";
 
-export async function login(data) {
-    // const validUser = data.email === "admin@gmail.com" && data.password === "1234";
+class AuthService{
+    #user=null;
+    constructor() {}
 
-    // if (!validUser) {
-    //     throw new Error("Credenciales inválidas");
-    // }
-
-    // const fakeToken = "abc123TOKEN";
-    // saveUser(fakeToken, data.email);
-
-    // return true;
-
-    const res = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
-
-    const json = await res.json();
-
-    if (res.status >= 400) {
-        throw new Error(json.error);
-    }
-
-    // Guardar token y datos del usuario
-    saveUser(json.token, json.user);
-
-    // Redirigir según el rol después de 1 segundo
-    // setTimeout(() => {
-    //     if (json.user.role === 'proveedor') {
-    //         window.location.href = 'dashboard-proveedor.html';
-    //     } else {
-    //         window.location.href = 'dashboard-cliente.html';
-    //     }
-    // }, 1000);
-
-    return true;
-}
-
-export function logout() {
-    clearToken();
-    localStorage.removeItem('user');
-}
-
-export async function register(data) {
-    const res = await fetch("http://localhost:3000/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
-
-    const json = await res.json();
-
-    console.log('json:',json)
-    if (res.status >= 400) {
-        if (json.errors) {
-            const errors = json.errors.map(err=>err.msg);
-            throw new Error(errors);
-        } else {
+    async login(data) {
+        const res = await fetch("http://localhost:3000/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+    
+        const json = await res.json();
+    
+        if (res.status >= 400) {
             throw new Error(json.error);
         }
+    
+        // Guardar token y datos del usuario
+        this.#saveUser(json.token, json.user);
+    
+        return true;
+    }
+    
+    logout() {
+        token.setToken(null);
+        this.#user = null;
+    }
+    
+    async register(data) {
+        const res = await fetch("http://localhost:3000/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+    
+        const json = await res.json();
+    
+        console.log('json:',json)
+        if (res.status >= 400) {
+            if (json.errors) {
+                const errors = json.errors.map(err=>err.msg);
+                throw new Error(errors);
+            } else {
+                throw new Error(json.error);
+            }
+        }
+    
+        this.#saveUser(json.token, json.user);
+    }
+    
+    #saveUser(newToken, userData){
+        token.setToken(newToken);
+        this.#user = userData;
+    }
+    
+    getUser(){
+        // const user= JSON.parse(localStorage.getItem('user'));
+        return this.#user;
     }
 
-    saveUser(json.token, json.user);
 }
 
-function saveUser(token, user){
-    setToken(token);
-    localStorage.setItem('user', JSON.stringify(user));
-}
-
-export function getUser(){
-    const user= JSON.parse(localStorage.getItem('user'));
-    return user;
-}
+export const auth = new AuthService();

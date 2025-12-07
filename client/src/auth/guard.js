@@ -1,9 +1,9 @@
-import { isAuthenticated } from "./token.js";
+import { token } from "./token.js";
 import { LoginView } from "../views/LoginView.js";
 
 export function requireAuth(viewFunction) {
   return () => {
-    if (!isAuthenticated()) {
+    if (!token.isAuthenticated()) {
       LoginView("Debes iniciar sesión para acceder.");
       return;
     }

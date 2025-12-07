@@ -1,4 +1,4 @@
-import { register } from "../auth/authService.js";
+import { auth } from "../auth/authService.js";
 import { render } from "../utils/render.js";
 
 export function RegisterView(msg = '') {
@@ -88,7 +88,7 @@ export function RegisterView(msg = '') {
             data.service_type = document.getElementById("service_type").value;
         }
         try {
-            await register(data);
+            await auth.register(data);
             history.pushState(null, null, "/");
             location.reload();
         } catch (err) {

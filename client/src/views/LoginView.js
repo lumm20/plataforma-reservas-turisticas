@@ -1,4 +1,5 @@
-import { login } from "../auth/authService";
+import {auth} from "../auth/authService.js";
+import { loadRoute } from "../router/router.js";
 import { render } from "../utils/render";
 
 export function LoginView(msg='') {
@@ -45,9 +46,12 @@ export function LoginView(msg='') {
     };
 
     try {
-      await login(data);
-      history.pushState(null, null, "/");
-      location.reload();
+      const ok = await auth.login(data);
+      if(ok){
+        history.pushState(null, null, "/");
+        loadRoute('/');
+        // location.reload();
+      }
     } catch (err) {
       LoginView(err.message);
     }

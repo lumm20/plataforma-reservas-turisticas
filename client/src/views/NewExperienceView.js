@@ -1,4 +1,4 @@
-import { getUser } from "../auth/authService";
+import { auth } from "../auth/authService";
 import { fetchExperience, validateForm } from "../services/experiences";
 import { render } from "../utils/render";
 
@@ -102,7 +102,7 @@ async function submitForm(evt,formData){
         return;
     }
 
-    const id= getUser()?.id;
+    const id= auth.getUser()?.id;
 
     console.log('id:',id);
     //se crea el objeto a enviar en la peticion
